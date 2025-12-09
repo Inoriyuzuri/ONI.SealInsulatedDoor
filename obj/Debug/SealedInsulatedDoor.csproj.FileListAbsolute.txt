@@ -1,0 +1,8 @@
+C:\MyProject\ONI.SealInsulatedDoor\bin\Debug\SealedInsulatedDoor.dll
+C:\MyProject\ONI.SealInsulatedDoor\bin\Debug\SealedInsulatedDoor.pdb
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.csproj.AssemblyReference.cache
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.csproj.CoreCompileInputs.cache
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.sourcelink.json
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.dll
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.pdb
