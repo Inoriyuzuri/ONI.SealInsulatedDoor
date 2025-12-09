@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<AssemblyName>SealedInsulatedDoor</AssemblyName>
+		<RootNamespace>SealedInsulatedDoor</RootNamespace>
+		<LangVersion>latest</LangVersion>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<ONI_Path>D:\SteamLibrary\steamapps\common\OxygenNotIncluded</ONI_Path>
+		<ONI_Data>$(ONI_Path)\OxygenNotIncluded_Data</ONI_Data>
+		<ONI_Managed>$(ONI_Data)\Managed</ONI_Managed>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(ONI_Managed)\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>$(ONI_Managed)\Assembly-CSharp-firstpass.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="0Harmony">
+			<HintPath>$(ONI_Managed)\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(ONI_Managed)\UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(ONI_Managed)\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<Target Name="CopyToMods" AfterTargets="Build">
+		<PropertyGroup>
+			<ModsFolder>$(USERPROFILE)\Documents\Klei\OxygenNotIncluded\mods\Dev\$(AssemblyName)</ModsFolder>
+		</PropertyGroup>
+		<Message Text="Copying mod to: $(ModsFolder)" Importance="high" />
+		<MakeDir Directories="$(ModsFolder)" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="$(ProjectDir)mod.yaml;$(ProjectDir)mod_info.yaml" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
+		<Message Text="Mod files copied successfully!" Importance="high" />
+	</Target>
+</Project>
