@@ -6,3 +6,5 @@ C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.csproj.CoreComp
 C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.sourcelink.json
 C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.dll
 C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedInsulatedDoor.pdb
+C:\MyProject\ONI.SealInsulatedDoor\bin\Debug\PLib.dll
+C:\MyProject\ONI.SealInsulatedDoor\obj\Debug\SealedIn.3864BEEA.Up2Date

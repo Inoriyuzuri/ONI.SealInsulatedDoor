@@ -12,9 +12,12 @@
 		<ONI_Data>$(ONI_Path)\OxygenNotIncluded_Data</ONI_Data>
 		<ONI_Managed>$(ONI_Data)\Managed</ONI_Managed>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="PLib" Version="4.19.0" />
+	  <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.44.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="PLib" Version="4.19.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,10 +41,6 @@
 			<HintPath>$(ONI_Managed)\UnityEngine.CoreModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Newtonsoft.Json">
-			<HintPath>$(ONI_Managed)\Newtonsoft.Json.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
 	</ItemGroup>
 
 	<Target Name="CopyToMods" AfterTargets="Build">
@@ -51,7 +50,6 @@
 		<Message Text="Copying mod to: $(ModsFolder)" Importance="high" />
 		<MakeDir Directories="$(ModsFolder)" />
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
-		<Copy SourceFiles="$(OutputPath)PLib.dll" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
 		<Copy SourceFiles="$(ProjectDir)mod.yaml;$(ProjectDir)mod_info.yaml" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
 		<Message Text="Mod files copied successfully!" Importance="high" />
 	</Target>

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NSOdvCmRl6c=",
+  "dgSpecHash": "Di6v3fNh0dw=",
   "success": true,
   "projectFilePath": "C:\\MyProject\\ONI.SealInsulatedDoor\\SealedInsulatedDoor.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Inoriyuzuriha\\.nuget\\packages\\plib\\4.19.0\\plib.4.19.0.nupkg.sha512"
+  ],
   "logs": []
 }

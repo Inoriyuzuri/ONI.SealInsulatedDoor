@@ -4,7 +4,9 @@ namespace SealedInsulatedDoor
 {
     public class SealedDoorController : KMonoBehaviour, ISim200ms
     {
+#pragma warning disable CS0649
         [MyCmpGet] private Building building;
+#pragma warning restore CS0649
         private List<int> doorCells = new List<int>();
 
         protected override void OnSpawn()
