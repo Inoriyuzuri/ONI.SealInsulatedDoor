@@ -1,83 +1,43 @@
-using UnityEngine;
 using System.Collections.Generic;
 
 namespace SealedInsulatedDoor
 {
     public class SealedDoorController : KMonoBehaviour, ISim200ms
     {
-#pragma warning disable CS0649
-        [MyCmpGet]
-        private Building building;
-#pragma warning restore CS0649
-
+        [MyCmpGet] private Building building;
         private List<int> doorCells = new List<int>();
-        private bool isRegistered = false;
-
-        protected override void OnPrefabInit()
-        {
-            base.OnPrefabInit();
-        }
 
         protected override void OnSpawn()
         {
             base.OnSpawn();
-            CacheOccupiedCells();
+            foreach (int cell in building.PlacementCells)
+                doorCells.Add(cell);
             ApplySeal();
-            isRegistered = true;
         }
 
         protected override void OnCleanUp()
         {
-            isRegistered = false;
-            RemoveSeal();
+            foreach (int cell in doorCells)
+            {
+                if (!Grid.IsValidCell(cell)) continue;
+                SimMessages.ClearCellProperties(cell, (byte)Sim.Cell.Properties.GasImpermeable);
+                SimMessages.ClearCellProperties(cell, (byte)Sim.Cell.Properties.LiquidImpermeable);
+                SimMessages.SetInsulation(cell, 0f);
+            }
             base.OnCleanUp();
         }
 
-        private void CacheOccupiedCells()
-        {
-            doorCells.Clear();
-            
-            if (building != null)
-            {
-                foreach (int cell in building.PlacementCells)
-                {
-                    doorCells.Add(cell);
-                }
-            }
-        }
-
-        public void Sim200ms(float dt)
-        {
-            if (!isRegistered) return;
-            ApplySeal();
-        }
+        public void Sim200ms(float dt) => ApplySeal();
 
         private void ApplySeal()
         {
             foreach (int cell in doorCells)
             {
-                if (Grid.IsValidCell(cell))
-                {
-                    SimMessages.SetCellProperties(cell, (byte)Sim.Cell.Properties.GasImpermeable);
-                    SimMessages.SetCellProperties(cell, (byte)Sim.Cell.Properties.LiquidImpermeable);
-                    Grid.Foundation[cell] = true;
-                    
-                    // Apply maximum insulation to block heat transfer
-                    SimMessages.SetInsulation(cell, float.MaxValue);
-                }
-            }
-        }
-
-        private void RemoveSeal()
-        {
-            foreach (int cell in doorCells)
-            {
-                if (Grid.IsValidCell(cell))
-                {
-                    SimMessages.ClearCellProperties(cell, (byte)Sim.Cell.Properties.GasImpermeable);
-                    SimMessages.ClearCellProperties(cell, (byte)Sim.Cell.Properties.LiquidImpermeable);
-                    SimMessages.SetInsulation(cell, 0f);
-                }
+                if (!Grid.IsValidCell(cell)) continue;
+                SimMessages.SetCellProperties(cell, (byte)Sim.Cell.Properties.GasImpermeable);
+                SimMessages.SetCellProperties(cell, (byte)Sim.Cell.Properties.LiquidImpermeable);
+                SimMessages.SetInsulation(cell, float.MaxValue);
+                Grid.Foundation[cell] = true;
             }
         }
     }

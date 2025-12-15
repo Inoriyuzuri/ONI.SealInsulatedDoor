@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\MyProject\\ONI.SealInsulatedDoor\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8B0DD7C5-141C-31A0-1CD3-5DB075885DAE}|SealedInsulatedDoor.csproj|c:\\myproject\\oni.sealinsulateddoor\\sealedinsulateddoorconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B0DD7C5-141C-31A0-1CD3-5DB075885DAE}|SealedInsulatedDoor.csproj|solutionrelative:sealedinsulateddoorconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SealedInsulatedDoorConfig.cs",
+              "DocumentMoniker": "C:\\MyProject\\ONI.SealInsulatedDoor\\SealedInsulatedDoorConfig.cs",
+              "RelativeDocumentMoniker": "SealedInsulatedDoorConfig.cs",
+              "ToolTip": "C:\\MyProject\\ONI.SealInsulatedDoor\\SealedInsulatedDoorConfig.cs",
+              "RelativeToolTip": "SealedInsulatedDoorConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T00:57:26.009Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
