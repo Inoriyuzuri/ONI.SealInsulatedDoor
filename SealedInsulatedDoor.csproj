@@ -38,6 +38,10 @@
 			<HintPath>$(ONI_Managed)\UnityEngine.CoreModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>$(ONI_Managed)\UnityEngine.ImageConversionModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 		<Reference Include="Newtonsoft.Json">
 			<HintPath>$(ONI_Managed)\Newtonsoft.Json.dll</HintPath>
 			<Private>false</Private>
@@ -50,9 +54,13 @@
 		</PropertyGroup>
 		<Message Text="Copying mod to: $(ModsFolder)" Importance="high" />
 		<MakeDir Directories="$(ModsFolder)" />
+		<MakeDir Directories="$(ModsFolder)\anim\assets\SealedInsulatedDoor" />
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
 		<Copy SourceFiles="$(OutputPath)PLib.dll" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
 		<Copy SourceFiles="$(ProjectDir)mod.yaml;$(ProjectDir)mod_info.yaml" DestinationFolder="$(ModsFolder)" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="$(ProjectDir)anim\assets\SealedInsulatedDoor\SealedInsulatedDoor_0.png" DestinationFolder="$(ModsFolder)\anim\assets\SealedInsulatedDoor" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="$(ProjectDir)anim\assets\SealedInsulatedDoor\SealedInsulatedDoor_anim.bytes" DestinationFolder="$(ModsFolder)\anim\assets\SealedInsulatedDoor" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="$(ProjectDir)anim\assets\SealedInsulatedDoor\SealedInsulatedDoor_build.bytes" DestinationFolder="$(ModsFolder)\anim\assets\SealedInsulatedDoor" SkipUnchangedFiles="true" />
 		<Message Text="Mod files copied successfully!" Importance="high" />
 	</Target>
 </Project>

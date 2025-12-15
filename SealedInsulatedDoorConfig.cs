@@ -13,10 +13,10 @@ namespace SealedInsulatedDoor
         public override BuildingDef CreateBuildingDef()
         {
             BuildingDef def = BuildingTemplates.CreateBuildingDef(
-                ID, 1, 2, "door_external_kanim", 100, 60f,
-                BUILDINGS.CONSTRUCTION_MASS_KG.TIER2, MATERIALS.ALL_METALS,
-                2400f, BuildLocationRule.Tile,
-                BUILDINGS.DECOR.PENALTY.TIER1, NOISE_POLLUTION.NONE);
+                ID, 1, 2, "SealedInsulatedDoor_kanim", 30, 60f,
+                BUILDINGS.CONSTRUCTION_MASS_KG.TIER3, MATERIALS.ALL_METALS,
+                1600f, BuildLocationRule.Tile,
+                BUILDINGS.DECOR.PENALTY.TIER2, NOISE_POLLUTION.NONE);
 
             def.ThermalConductivity = 0f;
             def.Overheatable = false;
@@ -26,11 +26,10 @@ namespace SealedInsulatedDoor
             def.TileLayer = ObjectLayer.FoundationTile;
             def.AudioCategory = "Metal";
             def.PermittedRotations = PermittedRotations.R90;
-            def.SceneLayer = Grid.SceneLayer.TileMain;
-            def.ForegroundLayer = Grid.SceneLayer.InteriorWall;
 
-            SoundEventVolumeCache.instance.AddVolume("door_external_kanim", "Open_DoorPressure", NOISE_POLLUTION.NOISY.TIER2);
-            SoundEventVolumeCache.instance.AddVolume("door_external_kanim", "Close_DoorPressure", NOISE_POLLUTION.NOISY.TIER2);
+            SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_gear_LP", NOISE_POLLUTION.NOISY.TIER1);
+            SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_open", NOISE_POLLUTION.NOISY.TIER2);
+            SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_close", NOISE_POLLUTION.NOISY.TIER2);
 
             return def;
         }

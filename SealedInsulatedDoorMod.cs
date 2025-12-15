@@ -16,24 +16,13 @@ namespace SealedInsulatedDoor
         }
     }
 
-    [HarmonyPatch(typeof(Door), "OnPrefabInit")]
-    public class Door_OnPrefabInit_Patch
-    {
-        private static void Postfix(ref Door __instance)
-        {
-            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID)
-                return;
-            __instance.overrideAnims = new KAnimFile[] { Assets.GetAnim("anim_use_remote_kanim") };
-        }
-    }
-
+    // 密封逻辑：设置气体/液体不透过
     [HarmonyPatch(typeof(Door), "SetSimState")]
     public class Door_SetSimState_Patch
     {
-        public static void Postfix(Door __instance, bool is_door_open, IList<int> cells)
+        public static void Postfix(Door __instance, IList<int> cells)
         {
-            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID)
-                return;
+            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID) return;
 
             foreach (int cell in cells)
             {
@@ -44,16 +33,15 @@ namespace SealedInsulatedDoor
         }
     }
 
+    // 清理：移除门时恢复格子属性
     [HarmonyPatch(typeof(Door), "OnCleanUp")]
     public class Door_OnCleanUp_Patch
     {
         public static void Prefix(Door __instance)
         {
-            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID)
-                return;
+            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID) return;
 
-            int[] cells = __instance.building.PlacementCells;
-            foreach (int cell in cells)
+            foreach (int cell in __instance.building.PlacementCells)
             {
                 if (!Grid.IsValidCell(cell)) continue;
                 SimMessages.ClearCellProperties(cell, (byte)(Sim.Cell.Properties.GasImpermeable | Sim.Cell.Properties.LiquidImpermeable));
@@ -62,6 +50,7 @@ namespace SealedInsulatedDoor
         }
     }
 
+    // 注册建筑和本地化
     [HarmonyPatch(typeof(Db), "Initialize")]
     public class Db_Initialize_Patch
     {
@@ -75,12 +64,12 @@ namespace SealedInsulatedDoor
 
         public static void Postfix()
         {
-            var tech = Db.Get().Techs.TryGet("TemperatureModulation");
-            tech?.unlockedItemIDs.Add(SealedInsulatedDoorConfig.ID);
+            Db.Get().Techs.TryGet("TemperatureModulation")?.unlockedItemIDs.Add(SealedInsulatedDoorConfig.ID);
             ModUtil.AddBuildingToPlanScreen("Base", SealedInsulatedDoorConfig.ID, "doors", "PressureDoor");
         }
     }
 
+    // 中文本地化
     [HarmonyPatch(typeof(Localization), "Initialize")]
     public class Localization_Initialize_Patch
     {
