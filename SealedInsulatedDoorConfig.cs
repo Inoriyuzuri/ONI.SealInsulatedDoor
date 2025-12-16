@@ -23,9 +23,11 @@ namespace SealedInsulatedDoor
             def.Floodable = false;
             def.Entombable = false;
             def.IsFoundation = true;
-            def.TileLayer = ObjectLayer.FoundationTile;
+            def.TileLayer = (ObjectLayer)9;
             def.AudioCategory = "Metal";
             def.PermittedRotations = PermittedRotations.R90;
+            def.SceneLayer = (Grid.SceneLayer)30;
+            def.ForegroundLayer = (Grid.SceneLayer)16;
 
             SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_gear_LP", NOISE_POLLUTION.NOISY.TIER1);
             SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_open", NOISE_POLLUTION.NOISY.TIER2);
