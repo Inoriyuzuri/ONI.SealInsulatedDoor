@@ -22,7 +22,10 @@ namespace SealedInsulatedDoor
     {
         public static void Postfix(Door __instance, IList<int> cells)
         {
-            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID) return;
+            if (__instance == null || cells == null) return;
+
+            var prefabID = __instance.GetComponent<KPrefabID>();
+            if (prefabID == null || prefabID.PrefabTag != SealedInsulatedDoorConfig.ID) return;
 
             foreach (int cell in cells)
             {
@@ -39,7 +42,12 @@ namespace SealedInsulatedDoor
     {
         public static void Prefix(Door __instance)
         {
-            if (__instance.PrefabID() != SealedInsulatedDoorConfig.ID) return;
+            if (__instance == null) return;
+
+            var prefabID = __instance.GetComponent<KPrefabID>();
+            if (prefabID == null || prefabID.PrefabTag != SealedInsulatedDoorConfig.ID) return;
+
+            if (__instance.building == null || __instance.building.PlacementCells == null) return;
 
             foreach (int cell in __instance.building.PlacementCells)
             {
@@ -56,6 +64,7 @@ namespace SealedInsulatedDoor
     {
         public static void Prefix()
         {
+            // Register English first as fallback
             string id = SealedInsulatedDoorConfig.ID.ToUpperInvariant();
             Strings.Add($"STRINGS.BUILDINGS.PREFABS.{id}.NAME", "Sealed Insulated Door");
             Strings.Add($"STRINGS.BUILDINGS.PREFABS.{id}.DESC", "A heavy-duty door with perfect gas, liquid and thermal isolation.");
@@ -66,15 +75,8 @@ namespace SealedInsulatedDoor
         {
             Db.Get().Techs.TryGet("TemperatureModulation")?.unlockedItemIDs.Add(SealedInsulatedDoorConfig.ID);
             ModUtil.AddBuildingToPlanScreen("Base", SealedInsulatedDoorConfig.ID, "doors", "PressureDoor");
-        }
-    }
 
-    // 中文本地化
-    [HarmonyPatch(typeof(Localization), "Initialize")]
-    public class Localization_Initialize_Patch
-    {
-        public static void Postfix()
-        {
+            // Now check locale and override if Chinese
             var locale = Localization.GetLocale();
             if (locale != null && locale.Code.StartsWith("zh"))
             {
