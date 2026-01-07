@@ -56,6 +56,17 @@ namespace SealedInsulatedDoor
         {
             go.GetComponent<AccessControl>().controlEnabled = true;
             go.GetComponent<KBatchedAnimController>().initialAnim = "closed";
+
+            // Add work animation overrides to prevent null anim crash when dupes interact
+            Door door = go.GetComponent<Door>();
+            if (door != null)
+            {
+                KAnimFile overrideAnim = Assets.GetAnim("anim_use_remote_kanim");
+                if (overrideAnim != null)
+                {
+                    door.overrideAnims = new KAnimFile[] { overrideAnim };
+                }
+            }
         }
     }
 }
